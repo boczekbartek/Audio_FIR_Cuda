@@ -33,15 +33,13 @@ void free_mem(float *coeff_ptr, float *yin_ptr,
 void read_data(int *n_ptr, int *len_ptr,
                float **coeff_ptr, float **yin_ptr,
                float **yref_ptr, float **yout_ptr) {
-    printf("Reading file...");
-    FILE *f = fopen("audiofir_in.dat", "rb");
+    FILE *f = fopen("/home/bartek/Devel/Audio_FIR_Cuda/audiofir_in.dat", "rb");
 
     fread(n_ptr, sizeof(int), 1, f);
     fread(len_ptr, sizeof(int), 1, f);
 
     alloc_mem(*n_ptr, *len_ptr,
               coeff_ptr, yin_ptr, yref_ptr, yout_ptr);
-
     fread(*coeff_ptr, sizeof(float), 1 + *n_ptr, f);
     fread(*yin_ptr, sizeof(float), 2 * *len_ptr, f);
     fread(*yref_ptr, sizeof(float), 2 * *len_ptr, f);
@@ -60,9 +58,11 @@ void write_data(int len, float *y) {
 void audiocmp(float *yout, float *yref, int len) {
     int k;
     float d, e = -1.0f;
-    for (k = 0; k < 2 * len; k++)
+    for (k = 0; k < 2* len; k++) {
+        printf("%lf - %lf\n", yout[k], yref[k]);
         if ((d = fabsf(yout[k] - yref[k])) > e)
             e = d;
+    }
     printf("max. abs. err. = %.1e\n", e);
 }
 
@@ -111,7 +111,6 @@ void elapsed_time(app_timer_t start, app_timer_t stop, double flop) {
 /**********************************************************/
 
 int main(int argc, char *argv[]) {
-    printf("Hello");
     app_timer_t start, stop;
     int n, len;
     float *coeff, *yin, *yref, *yout;
