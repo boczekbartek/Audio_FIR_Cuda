@@ -37,3 +37,5 @@ cmake-build-debug
 
 # Build directory
 build/
+
+*.dat

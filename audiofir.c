@@ -33,7 +33,7 @@ void free_mem(float *coeff_ptr, float *yin_ptr,
 void read_data(int *n_ptr, int *len_ptr,
                float **coeff_ptr, float **yin_ptr,
                float **yref_ptr, float **yout_ptr) {
-    FILE *f = fopen("/home/bartek/Devel/Audio_FIR_Cuda/audiofir_in.matlab.dat", "rb");
+    FILE *f = fopen("/home/bartek/Devel/Audio_FIR_Cuda/data/audiofir_in.matlab.dat", "rb");
 
     fread(n_ptr, sizeof(int), 1, f);
     fread(len_ptr, sizeof(int), 1, f);
