@@ -6,7 +6,7 @@ project(fir_cuda C CXX CUDA)
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 find_package(CUDA 10.0 REQUIRED)
-#set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 14)
 #if(MSVC)
 #    # Force to always compile with W4
 #    if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
@@ -33,6 +33,11 @@ set(
 add_executable(fir_cpu audiofir0.c audiofir.h audiofir.c)
 include_directories( ${OPENGL_INCLUDE_DIRS}  ${CUDA_COMMON})
 
-add_executable(fir_cuda audiofir1.cu audiofir.h audiofir.c)
-#target_link_libraries(fir_cuda ${CUDA_LIBRARY})
-target_link_libraries(fir_cuda ${CUDA_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+add_executable(fir_cuda1 audiofir1.cu audiofir.h audiofir.c)
+target_link_libraries(fir_cuda1 ${CUDA_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+
+add_executable(fir_cuda2 audiofir2.cu audiofir.h audiofir.c)
+target_link_libraries(fir_cuda2 ${CUDA_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+
+add_executable(fir_cuda3 audiofir3.cu audiofir.h audiofir.c)
+target_link_libraries(fir_cuda3 ${CUDA_LIBRARY} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
